@@ -6,7 +6,7 @@ namespace ASP.NET_EducationPlatform.Controllers
     {
         public IActionResult Index()
         {
-            return View("Index");
+            return View();
         }
     }
 }
