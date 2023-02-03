@@ -6,12 +6,13 @@
 /* This file remains property of www.pixelateddesign.co.uk however this is free to use for personal use */
 
 body {
-	margin:0px;
-	padding:0px;
+	margin: 0px;
+	padding: 0px;
 	background-attachment: scroll;
 	background-image: url(../images/background.jpg);
 	background-repeat: repeat-x;
 	background-position: left top;
+	
 }
 
 #content_container {
@@ -137,6 +138,13 @@ body {
 	width:400px;
 	float:left;
 	margin-right:40px;
+}
+
+#footer {
+	margin-top: -100px;
+	/*Минус Высота футера*/
+	height: 100px;
+	/*Высота футера*/
 }
 
 /*Warning removing this means you must pay for this templete if you remove this you will be located and this will result in payment being required*/

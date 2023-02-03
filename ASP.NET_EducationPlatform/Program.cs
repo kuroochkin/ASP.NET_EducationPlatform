@@ -15,7 +15,6 @@ if(app.Environment.IsDevelopment())
 app.UseRouting(); // система маршрутизации
 app.UseStaticFiles(); // статические файлы wwwroot
 
-app.MapGet("/", () => "Hello World!");
 
 app.MapControllerRoute( 
     name: "default",
