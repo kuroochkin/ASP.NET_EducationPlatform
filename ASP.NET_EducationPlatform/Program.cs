@@ -1,7 +1,13 @@
+using ASP.NET_EducationPlatform.Infrastructure;
+using ASP.NET_EducationPlatform.Infrastructure.Conventions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services; // сервисы
-services.AddControllersWithViews();
+services.AddControllersWithViews(opt =>
+{
+    opt.Conventions.Add(new TestConvention());
+});
 
 var app = builder.Build();
 
@@ -14,7 +20,7 @@ if(app.Environment.IsDevelopment())
 
 app.UseRouting(); // система маршрутизации
 app.UseStaticFiles(); // статические файлы wwwroot
-
+app.UseMiddleware<TestMiddleware>(); // cвое ПО
 
 app.MapControllerRoute( 
     name: "default",
