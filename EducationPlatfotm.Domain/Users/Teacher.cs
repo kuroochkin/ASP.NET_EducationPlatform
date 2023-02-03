@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace EducationPlatfotm.Domain.Users
 {
-    public class Teacher : FIO
+    public class Teacher : FIO, IEntity
     {
-        
+        public int Id { get; set; }
     }
 }
