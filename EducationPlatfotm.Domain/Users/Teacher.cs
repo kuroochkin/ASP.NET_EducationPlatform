@@ -12,5 +12,6 @@ namespace EducationPlatfotm.Domain.Users
     public class Teacher : FIO, IEntity
     {
         public int Id { get; set; }
+        public string Speciality { get; set; } = null!;
     }
 }
