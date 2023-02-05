@@ -51,7 +51,9 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
             if(db_teacher is null)
                 throw new ArgumentNullException(nameof(db_teacher));
 
-            return true; //gdfgdfgdf
+            return true;
+
+           
         }
 
         public IEnumerable<Teacher> GetAllTeachers()
