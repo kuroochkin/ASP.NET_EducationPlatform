@@ -1,5 +1,6 @@
 ﻿using ASP.NET_EducationPlatform.Services.Interfaces;
 using ASP.NET_EducationPlatform.ViewModels;
+using EducationPlatfotm.Domain;
 using EducationPlatfotm.Domain.Users;
 using Microsoft.AspNetCore.Mvc;
 using System.Data.Entity.Core.Mapping;
@@ -45,7 +46,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LastName = teacher.LastName,
                 FirstName = teacher.FirstName,
                 Patronymic = teacher.Patronymic,
-                Speciality = teacher.Speciality,
+                Speciality = teacher.Subject.Name,
             };
 
             return View(model);
@@ -63,7 +64,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LastName = model.LastName,
                 FirstName = model.FirstName,
                 Patronymic = model.Patronymic,
-                Speciality = model.Speciality,
+                Subject = new Subject { Name = model.Speciality }
             };
 
             if(!_teachers.Edit(teacher))

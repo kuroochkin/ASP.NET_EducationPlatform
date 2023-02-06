@@ -16,7 +16,7 @@
                     <th>@Html.DisplayNameFor(model => model.LastName)</th>
                     <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                     <th>@Html.DisplayNameFor(model => model.Patronymic)</th>
-                    <th>@Html.DisplayNameFor(model => model.Speciality)</th>
+                    <th>@Html.DisplayNameFor(model => model.Subject.Name)</th>
                 </tr>
             </thead>
 
@@ -35,7 +35,7 @@
                         <td>@teacher.LastName</td>
                         <td>@teacher.FirstName</td>
                         <td>@teacher.Patronymic</td>
-                        <td>@teacher.Speciality</td>
+                        <td>@teacher.Subject.Name</td>
                         <td>
                             <a asp-controller="Teacher" asp-action="Delete" asp-route-Id="@teacher.Id">Удалить</a>
                         </td>

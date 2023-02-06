@@ -54,7 +54,7 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
             db_teacher.FirstName = teacher.FirstName;
             db_teacher.LastName = teacher.LastName;
             db_teacher.Patronymic = teacher.Patronymic;
-            db_teacher.Speciality = teacher.Speciality;
+            db_teacher.Subject.Name = teacher.Subject.Name;
 
             return true;
 
