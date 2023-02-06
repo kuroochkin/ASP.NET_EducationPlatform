@@ -51,6 +51,11 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
             if(db_teacher is null)
                 throw new ArgumentNullException(nameof(db_teacher));
 
+            db_teacher.FirstName = teacher.FirstName;
+            db_teacher.LastName = teacher.LastName;
+            db_teacher.Patronymic = teacher.Patronymic;
+            db_teacher.Speciality = teacher.Speciality;
+
             return true;
 
            
