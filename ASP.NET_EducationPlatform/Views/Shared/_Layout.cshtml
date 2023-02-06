@@ -14,14 +14,17 @@
 
 <body>
     
-    @await Html.PartialAsync("Partial/_Header")
+    <partial Name="Partial/_Header" />
+    @*@await Html.PartialAsync("Partial/_Header")*@
+    <partial Name="Partial/_Footer" />
+    <partial Name="Partial/_Scripts" />
 
     
-
     @RenderBody();
+    
+    
 
-    <partial Name="Partial/_Footer"/>
-    <partial Name="Partial/_Scripts"/>
+   
 
 </body>
 </html>
