@@ -72,5 +72,37 @@ namespace ASP.NET_EducationPlatform.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            if (id < 0)
+                return BadRequest();
+
+            var teacher = _teachers.GetById(id);
+            if (teacher is null)
+                return NotFound();
+
+            var model = new TeacherViewModel
+            {
+                Id = teacher.Id,
+                LastName = teacher.LastName,
+                FirstName = teacher.FirstName,
+                Patronymic = teacher.Patronymic,
+                Speciality = teacher.Subject.Name,
+            };
+
+            return View(model);
+        }
+
+        public IActionResult DeleteConfirmed(int id)
+        {
+            var teacher = _teachers.GetById(id);
+            if (teacher is null)
+                return NotFound();
+
+            _teachers.Delete(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }
