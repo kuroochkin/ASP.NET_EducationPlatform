@@ -46,7 +46,8 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LastName = teacher.LastName,
                 FirstName = teacher.FirstName,
                 Patronymic = teacher.Patronymic,
-                Speciality = teacher.Subject.Name,
+                Speciality = teacher.Subjects,
+                Selected = teacher.Subjects.
             };
 
             return View(model);
@@ -64,7 +65,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LastName = model.LastName,
                 FirstName = model.FirstName,
                 Patronymic = model.Patronymic,
-                Subject = new Subject { Name = model.Speciality }
+                Subjects = model.Speciality,
             };
 
             if(!_teachers.Edit(teacher))
@@ -88,7 +89,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LastName = teacher.LastName,
                 FirstName = teacher.FirstName,
                 Patronymic = teacher.Patronymic,
-                Speciality = teacher.Subject.Name,
+                Speciality = teacher.Subjects,
             };
 
             return View(model);

@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ASP.NET_EducationPlatform.Data;
+using EducationPlatfotm.Domain;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace ASP.NET_EducationPlatform.ViewModels
@@ -20,9 +22,10 @@ namespace ASP.NET_EducationPlatform.ViewModels
         [Display(Name = "Отчество")]
         [RegularExpression(@"([А-ЯЁ][а-яё]+)|([A-Z][a-z]+)", ErrorMessage = "Некорректный ввод")]
         public string Patronymic { get; set; }
-        
+
         [Display(Name = "Преподаваемые предметы")]
-        [RegularExpression(@"([А-ЯЁ][а-яё]+)|([A-Z][a-z]+)", ErrorMessage = "Некорректный ввод")]
-        public string Speciality { get; set; }
+        public List<Subject> Speciality { get; set; }
+
+        public int Selected { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace EducationPlatfotm.Domain
 {
     public class Subject
     {
+        public int Id { get; set; }
         [Display(Name = "Преподаваемый премет")]
         public string Name { get; set; }
     }
