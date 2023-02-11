@@ -10,7 +10,7 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IStudentData _students { get; set; } // Свойство для хранения учеников в контроллере через сервис
         public StudentController(IStudentData StudentsData)
         {
-            _students = StudentsData; // Получаем данные по сотрудникам из класса TestData
+            _students = StudentsData; // Получаем данные по ученикам из класса TestData
         }
         public IActionResult Index()
         {
