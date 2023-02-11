@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EducationPlatfotm.Domain.Users.Student>
+
+<div class="container">
+    <h3>Сотрудники</h3>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+    @if (Model.Any())
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Id</th>
+                    <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Patronymic)</th>
+                    <th>@Html.DisplayNameFor(model => model.YearStudy)</th>
+                    <th>@Html.DisplayNameFor(model => model.Subjects)</th>
+                </tr>
+            </thead>
+
+            <tbode>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Student" asp-action="Details" asp-route-Id="@student.Id">
+                                Информация
+                                <i class="fa fa-id-card" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                        <td><a asp-controller="Student" asp-action="Edit" asp-route-Id="@student.Id">Редактировать</a></td>
+                        <td>@student.Id</td>
+                        <td>@student.LastName</td>
+                        <td>@student.FirstName</td>
+                        <td>@student.Patronymic</td>
+                        <td>@student.YearStudy</td>
+                        <td>
+                            @foreach (var sub in student.Subjects)
+                            {
+                                @if (sub.IsInvolved == true)
+                                {
+                                    <p>@sub.Name</p>
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a asp-controller="Student" asp-action="Delete" asp-route-Id="@student.Id">Удалить</a>
+                        </td>
+                    </tr>
+                }
+            </tbode>
+        </table>
+    }
+    else
+    {
+        <p>Учеников нет!</p>
+    }
+
+    <a asp-controller="Home" asp-action="Index">На главную</a>
+</div>
+

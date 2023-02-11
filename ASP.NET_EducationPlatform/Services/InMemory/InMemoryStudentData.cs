@@ -1,9 +1,10 @@
 ﻿using ASP.NET_EducationPlatform.Data;
+using ASP.NET_EducationPlatform.Services.Interfaces;
 using EducationPlatfotm.Domain.Users;
 
 namespace ASP.NET_EducationPlatform.Services.InMemory
 {
-    public class InMemoryStudentData
+    public class InMemoryStudentData : IStudentData
     {
         private ICollection<Student> _students;
 
@@ -59,7 +60,7 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
             return true;
         }
 
-        public IEnumerable<Student> GetAllTeachers()
+        public IEnumerable<Student> GetAllStudents()
         {
             return _students;
         }
