@@ -13,6 +13,6 @@ namespace EducationPlatfotm.Domain.Users
         public int YearStudy { get; set; }
 
         [Display(Name = "Изучаемые предметы")]
-        public ICollection<Subject> Subjects { get; set; } = null!;
+        public List<Subject> Subjects { get; set; } = new List<Subject>();
     }
 }
