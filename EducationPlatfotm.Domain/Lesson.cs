@@ -10,7 +10,8 @@ namespace EducationPlatfotm.Domain
 {
     public class Lesson : Entity
     {
-        public string Subject { get; set; } = null!;
+        public DateTime DateTime { get; set; }
+        public Subject Subject { get; set; } = null!;
 
         public string Direction { get; set; } = null!;
 
