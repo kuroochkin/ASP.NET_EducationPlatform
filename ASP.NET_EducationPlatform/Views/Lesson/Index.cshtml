@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<EducationPlatfotm.Domain.Lesson>
 
 <div class="container">
-    <h3>Сотрудники</h3>
+    <h3>Мои уроки</h3>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
     @if (Model.Any())
     {
-        <table class="table table-hover">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th></th>
@@ -35,13 +35,12 @@
                         <td>@lesson.DateTime</td>
                         <td>@lesson.Direction</td>
                         <td>@lesson.Subject.Name</td>
-                        <td>@lesson.Teacher</td>
+                        <td>@lesson.Teacher.LastName  @lesson.Teacher.FirstName @lesson.Teacher.Patronymic</td>
+
                         <td>
                             @foreach (var student in lesson.Students)
                             {
-                                <p>@student.LastName</p>
-                                <p>@student.FirstName</p>
-                                <p>@student.Patronymic</p>
+                            @student.LastName @student.FirstName @student.Patronymic
                             }
                         </td>
                         <td>
@@ -54,7 +53,7 @@
     }
     else
     {
-        <p>Учеников нет!</p>
+        <p>Уроков нет!</p>
     }
 
     <a asp-controller="Home" asp-action="Index">На главную</a>
