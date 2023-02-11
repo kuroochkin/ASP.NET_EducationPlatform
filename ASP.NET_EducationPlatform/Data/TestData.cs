@@ -20,9 +20,11 @@ namespace ASP.NET_EducationPlatform.Data
 
         public static List<Subject> subjects { get; } = new()
         {
-            new Subject{Name = "Инглиш"},
-            new Subject{Name = "Русский"}
-
+            new Subject{Id = 1, Name = "Физика", IsInvolved = false},
+            new Subject{Id = 2, Name = "Математика", IsInvolved = false},
+            new Subject{Id = 2, Name = "Обществознание", IsInvolved = false},
+            new Subject{Id = 2, Name = "Русский язык", IsInvolved = false},
+            new Subject{Id = 2, Name = "География", IsInvolved = false},
         };
     }
 }
