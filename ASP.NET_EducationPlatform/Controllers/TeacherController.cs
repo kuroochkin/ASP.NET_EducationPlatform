@@ -1,4 +1,6 @@
-﻿using ASP.NET_EducationPlatform.Services.Interfaces;
+﻿using ASP.NET_EducationPlatform.Components.Teachers;
+using ASP.NET_EducationPlatform.Data;
+using ASP.NET_EducationPlatform.Services.Interfaces;
 using ASP.NET_EducationPlatform.ViewModels;
 using EducationPlatfotm.Domain;
 using EducationPlatfotm.Domain.Users;
@@ -40,6 +42,13 @@ namespace ASP.NET_EducationPlatform.Controllers
             if (teacher is null)
                 return NotFound();
 
+            //var subjects = TestData.subjects.Select(s => new CheckBoxSubjects()
+            //{
+            //    Id = s.Id,
+            //    Title = s.Name,
+            //}).ToList();
+            
+
             var model = new TeacherViewModel
             {
                 Id = teacher.Id,
@@ -47,7 +56,6 @@ namespace ASP.NET_EducationPlatform.Controllers
                 FirstName = teacher.FirstName,
                 Patronymic = teacher.Patronymic,
                 Speciality = teacher.Subjects,
-                Selected = teacher.Subjects.
             };
 
             return View(model);

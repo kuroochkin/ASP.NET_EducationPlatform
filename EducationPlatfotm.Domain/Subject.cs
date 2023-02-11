@@ -14,5 +14,7 @@ namespace EducationPlatfotm.Domain
         public int Id { get; set; }
         [Display(Name = "Преподаваемый премет")]
         public string Name { get; set; }
+
+        public bool IsInvolved { get; set; }
     }
 }

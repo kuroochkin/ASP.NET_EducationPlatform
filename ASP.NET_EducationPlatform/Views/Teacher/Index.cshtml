@@ -38,7 +38,10 @@
                         <td>
                         @foreach(var sub in teacher.Subjects)
                         {
+                            @if(sub.IsInvolved == true)
+                            {
                                 <p>@sub.Name</p>
+                            }
                         }
                         </td>
                         <td>
