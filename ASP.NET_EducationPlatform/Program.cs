@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services; // сервисы
 services.AddSingleton<ITeacherData, InMemoryTeacherData>();
+services.AddSingleton<IStudentData, InMemoryStudentData>();
 
 services.AddControllersWithViews(opt =>
 {

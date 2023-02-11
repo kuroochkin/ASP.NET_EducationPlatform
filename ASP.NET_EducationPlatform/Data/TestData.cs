@@ -15,7 +15,7 @@ namespace ASP.NET_EducationPlatform.Data
         public static List<Student> students { get; } = new()
         {
             new Student {Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9},
-            new Student {Id = 1, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", YearStudy = 11},
+            new Student {Id = 2, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", YearStudy = 11},
         };
 
         public static List<Subject> subjects { get; } = new()
