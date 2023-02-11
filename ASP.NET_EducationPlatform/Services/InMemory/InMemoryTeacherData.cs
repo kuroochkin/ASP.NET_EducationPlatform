@@ -48,9 +48,15 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
                 return false;
 
             var db_teacher = GetById(teacher.Id);
+            if(db_teacher is null)
+                throw new ArgumentNullException(nameof(db_teacher));
 
-            
-
+            db_teacher.FirstName = teacher.FirstName;
+            db_teacher.LastName = teacher.LastName;
+            db_teacher.Patronymic = teacher.Patronymic;
+            db_teacher.Subjects = teacher.Subjects;
+                
+            return true;
         }
 
         public IEnumerable<Teacher> GetAllTeachers()

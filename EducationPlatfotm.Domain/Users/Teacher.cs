@@ -12,5 +12,11 @@ namespace EducationPlatfotm.Domain.Users
     public class Teacher : FIO, IEntity
     {
         public int Id { get; set; }
+        public List<Subject> Subjects { get; set; } = new()
+        {
+            new Subject{Id = 1, Name = "Физика", IsInvolved = true},
+            new Subject{Id = 2, Name = "Математика", IsInvolved = false},
+
+        };
     }
 }

@@ -11,10 +11,13 @@ namespace EducationPlatfotm.Domain.Base
     public class FIO : IFIO
     {
         [Required]
+        [Display(Name = "Фамилия")]
         public string LastName { get; set; }
         [Required]
+        [Display(Name = "Имя")]
         public string FirstName { get; set; }
         [Required]
+        [Display(Name = "Отчество")]
         public string Patronymic { get; set; }
     }
 }
