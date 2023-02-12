@@ -39,6 +39,8 @@ namespace ASP.NET_EducationPlatform.Data
                 Students = new List<Student> { new Student { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9 } },
             },
         };
+
+        
     }
 }
     

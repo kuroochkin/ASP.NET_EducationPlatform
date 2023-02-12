@@ -11,7 +11,6 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Id</th>
                     <th>@Html.DisplayNameFor(model => model.DateTime)</th>
                     <th>@Html.DisplayNameFor(model => model.Direction)</th>
                     <th>@Html.DisplayNameFor(model => model.Subject.Name)</th>
@@ -31,18 +30,21 @@
                             </a>
                         </td>
                         <td><a asp-controller="Lesson" asp-action="Edit" asp-route-Id="@lesson.Id">Редактировать</a></td>
-                        <td>@lesson.Id</td>
                         <td>@lesson.DateTime</td>
                         <td>@lesson.Direction</td>
                         <td>@lesson.Subject.Name</td>
-                        <td>@lesson.Teacher.LastName  @lesson.Teacher.FirstName @lesson.Teacher.Patronymic</td>
-
                         <td>
+                            <a asp-controller="Teacher" asp-action="Details" asp-route-Id="@lesson.Teacher.Id">
+                                @lesson.Teacher.LastName  @lesson.Teacher.FirstName @lesson.Teacher.Patronymic
+                            </a>
+                        </td>
+
+                        
                             @foreach (var student in lesson.Students)
                             {
-                            @student.LastName @student.FirstName @student.Patronymic
+                            <td>@student.LastName @student.LastName @student.Patronymic</td>
                             }
-                        </td>
+                        
                         <td>
                             <a asp-controller="Lesson" asp-action="Delete" asp-route-Id="@lesson.Id">Удалить</a>
                         </td>
