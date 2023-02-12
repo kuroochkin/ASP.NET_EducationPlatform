@@ -1,18 +1,22 @@
-﻿using ASP.NET_EducationPlatform.Services.Interfaces;
+﻿using ASP.NET_EducationPlatform.Data;
+using ASP.NET_EducationPlatform.Services.Interfaces;
 using ASP.NET_EducationPlatform.ViewModels;
 using EducationPlatfotm.Domain;
 using EducationPlatfotm.Domain.Users;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ASP.NET_EducationPlatform.Controllers
 {
     public class LessonController : Controller
     {
         private readonly ILessonData _lessonsData;
+        private readonly ITeacherData _teacherData;
 
-        public LessonController(ILessonData lessonData)
+        public LessonController(ILessonData lessonData, ITeacherData teacherData)
         {
             _lessonsData = lessonData;
+            _teacherData = teacherData;
         }
 
         public IActionResult Index()
@@ -38,14 +42,22 @@ namespace ASP.NET_EducationPlatform.Controllers
             if (lesson is null)
                 return NotFound();
 
+            var teachers = _teacherData.GetAllTeachers();
+
             var model = new LessonViewModel()
             {
+                Id = lesson.Id,
                 DateTime = lesson.DateTime,
                 Subject = lesson.Subject,
                 Direction = lesson.Direction,
                 Teacher = lesson.Teacher,
                 Students = lesson.Students,
             };
+
+            foreach(var teacher in teachers)
+            {
+                model.TeacherSelectList.Add(teacher);
+            }
 
             return View(model);
         }
@@ -55,6 +67,8 @@ namespace ASP.NET_EducationPlatform.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
+
+            
 
             var lesson = new Lesson()
             {

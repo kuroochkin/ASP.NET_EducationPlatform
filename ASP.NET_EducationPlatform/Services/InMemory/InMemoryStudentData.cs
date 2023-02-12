@@ -69,6 +69,5 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
         {
             return _students.FirstOrDefault(t => t.Id == id);
         }
-
     }
 }

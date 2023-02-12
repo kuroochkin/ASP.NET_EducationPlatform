@@ -24,5 +24,10 @@ namespace EducationPlatfotm.Domain.Users
             new Subject{Id = 5, Name = "География", IsInvolved = false},
         };
 
+        public string ByFIO()
+        {
+            return LastName + " " + FirstName + " " + Patronymic;
+        }
+
     }
 }

@@ -28,6 +28,9 @@ namespace EducationPlatfotm.Domain
         [Display(Name = "Преподаватель")]
         public Teacher Teacher { get; set; } = null!;
 
+        public int TeacherId { get; set; }
+
+
         [Required]
         [Display(Name = "Ученики")]
         public ICollection<Student> Students { get; set; }
