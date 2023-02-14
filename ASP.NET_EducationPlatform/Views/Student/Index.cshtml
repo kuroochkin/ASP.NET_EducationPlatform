@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<EducationPlatfotm.Domain.Users.Teacher>
+﻿@model IEnumerable<EducationPlatfotm.Domain.Users.Student>
 
 <div class="container">
     <h3>Сотрудники</h3>
@@ -16,36 +15,38 @@
                     <th>@Html.DisplayNameFor(model => model.LastName)</th>
                     <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                     <th>@Html.DisplayNameFor(model => model.Patronymic)</th>
+                    <th>@Html.DisplayNameFor(model => model.YearStudy)</th>
                     <th>@Html.DisplayNameFor(model => model.Subjects)</th>
                 </tr>
             </thead>
 
             <tbode>
-                @foreach (var teacher in Model)
+                @foreach (var student in Model)
                 {
                     <tr>
                         <td>
-                            <a asp-controller="Teacher" asp-action="Details" asp-route-Id="@teacher.Id">
+                            <a asp-controller="Student" asp-action="Details" asp-route-Id="@student.Id">
                                 Информация
                                 <i class="fa fa-id-card" aria-hidden="true"></i>
                             </a>
                         </td>
-                        <td><a asp-controller="Teacher" asp-action="Edit" asp-route-Id="@teacher.Id">Редактировать</a></td>
-                        <td>@teacher.Id</td>
-                        <td>@teacher.LastName</td>
-                        <td>@teacher.FirstName</td>
-                        <td>@teacher.Patronymic</td>
+                        <td><a asp-controller="Student" asp-action="Edit" asp-route-Id="@student.Id">Редактировать</a></td>
+                        <td>@student.Id</td>
+                        <td>@student.LastName</td>
+                        <td>@student.FirstName</td>
+                        <td>@student.Patronymic</td>
+                        <td>@student.YearStudy</td>
                         <td>
-                        @foreach(var sub in teacher.Subjects)
-                        {
-                            @if(sub.IsInvolved == true)
+                            @foreach (var sub in student.Subjects)
                             {
-                                <p>@sub.Name</p>
+                                @if (sub.IsInvolved == true)
+                                {
+                                    <p>@sub.Name</p>
+                                }
                             }
-                        }
                         </td>
                         <td>
-                            <a asp-controller="Teacher" asp-action="Delete" asp-route-Id="@teacher.Id">Удалить</a>
+                            <a asp-controller="Student" asp-action="Delete" asp-route-Id="@student.Id">Удалить</a>
                         </td>
                     </tr>
                 }
@@ -54,7 +55,7 @@
     }
     else
     {
-        <p>Сотрудников нет!</p>
+        <p>Учеников нет!</p>
     }
 
     <a asp-controller="Home" asp-action="Index">На главную</a>

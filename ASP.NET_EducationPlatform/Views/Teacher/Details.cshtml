@@ -44,11 +44,20 @@
             @Html.DisplayNameFor(model => model.Subjects)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Subjects)
+            @for(int i = 0; i < Model.Subjects.Count; i++)
+            {
+                @if(Model.Subjects[i].IsInvolved == true)
+                {   
+                    <th>@Html.DisplayFor(model => model.Subjects[i].Name)</th>
+                }
+            }
+            
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Index">На главную</a>
+        
+            <a asp-action="Index">На главную</a>
+        
 </div>
 </div>

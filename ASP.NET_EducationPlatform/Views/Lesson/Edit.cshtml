@@ -1,0 +1,55 @@
+﻿@using ASP.NET_EducationPlatform.Data
+
+
+@model ASP.NET_EducationPlatform.ViewModels.LessonViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container">
+
+    <h4>Редактирование информации об уроке - Id: @Model.Id </h4>
+
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit" asp-route-id="@Model.Id" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+                <div class="form-group">
+                    <label asp-for="DateTime" class="control-label"></label>
+                    <input asp-for="DateTime" class="form-control" />
+                    <span asp-validation-for="DateTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Direction" class="control-label"></label> 
+                    <input asp-for="Direction" class="form-control" />
+                    <span asp-validation-for="Direction" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <td>@Html.DisplayNameFor(model => model.Teacher)</td>
+                    <td>@Html.DropDownListFor(model => model.Teacher, new SelectList(Model.TeacherSelectList, "Value", "Text"))</td>
+                </div>
+            
+
+                <div class="form-group">
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </div>
+            </form>
+
+            <b>Value:</b>@ViewBag.Value
+            <b>Text:</b>@ViewBag.Text
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">На главную</a>
+    </div>
+</div>
+
+
