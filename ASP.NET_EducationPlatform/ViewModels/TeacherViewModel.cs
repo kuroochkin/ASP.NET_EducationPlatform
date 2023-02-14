@@ -27,6 +27,8 @@ namespace ASP.NET_EducationPlatform.ViewModels
         [Display(Name = "Преподаваемые предметы")]
         public List<Subject> Speciality { get; set; }
 
+        public string FIO => LastName + FirstName + Patronymic;
+
         
     }
 }

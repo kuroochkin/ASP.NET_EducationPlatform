@@ -5,6 +5,7 @@ namespace ASP.NET_EducationPlatform.Data
 {
     public static class TestData
     {
+        
         public static List<Teacher> teachers { get; set; } = new()
         {
             new Teacher {Id = 1, LastName = "Келин", FirstName = "Кирилл", Patronymic = "Вячеславович"},
@@ -22,9 +23,9 @@ namespace ASP.NET_EducationPlatform.Data
         {
             new Subject{Id = 1, Name = "Физика", IsInvolved = false},
             new Subject{Id = 2, Name = "Математика", IsInvolved = false},
-            new Subject{Id = 2, Name = "Обществознание", IsInvolved = false},
-            new Subject{Id = 2, Name = "Русский язык", IsInvolved = false},
-            new Subject{Id = 2, Name = "География", IsInvolved = false},
+            new Subject{Id = 3, Name = "Обществознание", IsInvolved = false},
+            new Subject{Id = 4, Name = "Русский язык", IsInvolved = false},
+            new Subject{Id = 5, Name = "География", IsInvolved = false},
         };
 
         public static List<Lesson> lessons { get; set; } = new()
@@ -36,7 +37,8 @@ namespace ASP.NET_EducationPlatform.Data
                 Subject = new Subject { Id = 1, Name = "Физика", IsInvolved = false },
                 Direction = "ОГЭ",
                 Teacher = new Teacher {Id = 1, LastName = "Келин", FirstName = "Кирилл", Patronymic = "Вячеславович"},
-                Students = new List<Student> { new Student { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9 } },
+                Students = new List<Student> { new Student { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9 },
+                                               new Student {Id = 2, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", YearStudy = 11}},
             },
         };
 

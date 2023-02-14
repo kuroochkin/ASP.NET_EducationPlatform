@@ -53,11 +53,14 @@ namespace ASP.NET_EducationPlatform.Services.InMemory
             if (db_lesson is null)
                 throw new ArgumentNullException(nameof(db_lesson));
 
+            db_lesson.Id = lesson.Id;
             db_lesson.Subject = lesson.Subject;
             db_lesson.Teacher = lesson.Teacher;
             db_lesson.Direction = lesson.Direction;
             db_lesson.Students = lesson.Students;
             db_lesson.DateTime = lesson.DateTime;
+            db_lesson.FIOTeacher = lesson.FIOTeacher;
+
 
             return true;
         }

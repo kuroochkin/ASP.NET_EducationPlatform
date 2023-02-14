@@ -36,9 +36,13 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(lesson);
         }
 
-        public IActionResult Edit(int id)
+        [HttpGet]
+        public IActionResult Edit(int? id)
         {
-            var lesson = _lessonsData.GetById(id);
+            if (id is null)
+                return View(new LessonViewModel());
+
+            var lesson = _lessonsData.GetById((int)id);
             if (lesson is null)
                 return NotFound();
 
@@ -51,13 +55,21 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subject = lesson.Subject,
                 Direction = lesson.Direction,
                 Teacher = lesson.Teacher,
+                FIO = lesson.Teacher.FIO,
                 Students = lesson.Students,
             };
 
             foreach(var teacher in teachers)
             {
-                model.TeacherSelectList.Add(teacher);
+                model.TeacherSelectList.Add(new SelectListItem
+                {
+                    Text = teacher.FIO,
+                    Value = Convert.ToString(teacher.Id),
+                }); 
             }
+
+            ViewBag.Value = model.Teacher.Id;
+            ViewBag.Text = model.Teacher.FIO;
 
             return View(model);
         }
@@ -65,9 +77,6 @@ namespace ASP.NET_EducationPlatform.Controllers
         [HttpPost]
         public IActionResult Edit(LessonViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
-
             
 
             var lesson = new Lesson()
@@ -77,14 +86,19 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subject = model.Subject,
                 Direction = model.Direction,
                 Teacher = model.Teacher,
+                FIOTeacher = model.FIO,
                 Students = model.Students,
             };
+            
 
             if (lesson is null)
                 return NotFound();
 
-            if(!_lessonsData.Edit(lesson))
+            else if(!_lessonsData.Edit(lesson))
                 return NotFound();
+
+            //ViewBag.Value = model.Teacher.Id;
+            //ViewBag.Text = model.Teacher.FIO;
 
             return RedirectToAction("Index");
         }

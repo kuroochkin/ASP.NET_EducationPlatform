@@ -12,19 +12,19 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public string Selected { get; set; }
 
-        [Required]
+        
         [Display(Name = "Дата")]
         public DateTime DateTime { get; set; }
 
-        [Required]
+       
         [Display(Name = "Предмет")]
         public Subject Subject { get; set; } = null!;
 
-        [Required]
+        
         [Display(Name = "Направление")]
         public string Direction { get; set; } = null!;
 
-        [Required]
+        
         [Display(Name = "Преподаватель")]
         public Teacher Teacher { get; set; } = null!;
 
@@ -32,16 +32,14 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public string TeacherName { get; set; } 
 
-        [Required]
+        
         [Display(Name = "Ученики")]
         public ICollection<Student> Students { get; set; }
 
-        public List<Teacher> TeacherSelectList { get; set; } = new List<Teacher>();
+        public List<SelectListItem> TeacherSelectList { get; set; } = new List<SelectListItem>();
 
-        public string ByFIO()
-        {
-            return Teacher.LastName + " " + Teacher.FirstName + " " + Teacher.Patronymic;
-        }
+        public string FIO { get;set; }
         
+
     }
 }

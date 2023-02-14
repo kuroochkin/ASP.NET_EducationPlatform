@@ -10,7 +10,6 @@
             <thead>
                 <tr>
                     <th></th>
-                    <th></th>
                     <th>@Html.DisplayNameFor(model => model.DateTime)</th>
                     <th>@Html.DisplayNameFor(model => model.Direction)</th>
                     <th>@Html.DisplayNameFor(model => model.Subject.Name)</th>
@@ -23,12 +22,7 @@
                 @foreach (var lesson in Model)
                 {
                     <tr>
-                        <td>
-                            <a asp-controller="Lesson" asp-action="Details" asp-route-Id="@lesson.Id">
-                                Информация
-                                <i class="fa fa-id-card" aria-hidden="true"></i>
-                            </a>
-                        </td>
+                        
                         <td><a asp-controller="Lesson" asp-action="Edit" asp-route-Id="@lesson.Id">Редактировать</a></td>
                         <td>@lesson.DateTime</td>
                         <td>@lesson.Direction</td>
@@ -39,11 +33,12 @@
                             </a>
                         </td>
 
-                        
+                        <td>
                             @foreach (var student in lesson.Students)
                             {
-                            <td>@student.LastName @student.LastName @student.Patronymic</td>
+                            <p>@student.LastName @student.LastName @student.Patronymic</p>
                             }
+                        </td>
                         
                         <td>
                             <a asp-controller="Lesson" asp-action="Delete" asp-route-Id="@lesson.Id">Удалить</a>
