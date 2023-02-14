@@ -40,7 +40,7 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IActionResult Edit(int? id)
         {
             if (id is null)
-                return View(new LessonViewModel());
+                return View(new EditLessonViewModel());
 
             var lesson = _lessonsData.GetById((int)id);
             if (lesson is null)
@@ -48,57 +48,57 @@ namespace ASP.NET_EducationPlatform.Controllers
 
             var teachers = _teacherData.GetAllTeachers();
 
-            var model = new LessonViewModel()
+            var model = new EditLessonViewModel()
             {
-                Id = lesson.Id,
-                DateTime = lesson.DateTime,
-                Subject = lesson.Subject,
+                LessonId = lesson.Id,
+                Date = lesson.DateTime,
                 Direction = lesson.Direction,
-                Teacher = lesson.Teacher,
-                FIO = lesson.Teacher.FIO,
-                Students = lesson.Students,
+                TeacherFullName = lesson.Teacher.FIO,
+                Selected = lesson.Teacher.Id.ToString(),
             };
 
-            foreach(var teacher in teachers)
+            foreach (var teacher in teachers)
             {
                 model.TeacherSelectList.Add(new SelectListItem
                 {
                     Text = teacher.FIO,
                     Value = Convert.ToString(teacher.Id),
-                }); 
+                });
             }
-
-            ViewBag.Value = model.Teacher.Id;
-            ViewBag.Text = model.Teacher.FIO;
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Edit(LessonViewModel model)
+        public IActionResult Edit(EditLessonViewModel model)
         {
-            
+            if (model == null || !ModelState.IsValid)
+                return NotFound();
 
-            var lesson = new Lesson()
-            {
-                Id = model.Id,
-                DateTime = model.DateTime,
-                Subject = model.Subject,
-                Direction = model.Direction,
-                Teacher = model.Teacher,
-                FIOTeacher = model.FIO,
-                Students = model.Students,
-            };
-            
+            var lesson = _lessonsData.GetById(model.LessonId);
 
             if (lesson is null)
-                return NotFound();
+                return BadRequest();
 
-            else if(!_lessonsData.Edit(lesson))
-                return NotFound();
+            var newTeacher = _teacherData.GetById(int.Parse(model.Selected));
+            if (newTeacher is null)
+                return BadRequest();
 
-            //ViewBag.Value = model.Teacher.Id;
-            //ViewBag.Text = model.Teacher.FIO;
+            lesson.DateTime = model.Date;
+            lesson.Direction = model.Direction;
+            lesson.Teacher = newTeacher;
+
+            #region Warning!
+            //Для работы с памятью это можно убрать(так как мы ссылку получаем)
+            //Когда будешь работать с БД, логику надо поменять
+
+
+            //if (!_lessonsData.Edit(lesson))
+            //    return NotFound();
+            #endregion
+
+            ViewBag.Value = lesson.Teacher.Id;
+            ViewBag.Text = lesson.Teacher.FIO;
 
             return RedirectToAction("Index");
         }
