@@ -18,7 +18,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
        
         [Display(Name = "Предмет")]
-        public Subject Subject { get; set; } = null!;
+        public string Subject { get; set; } = null!;
 
         
         [Display(Name = "Направление")]
@@ -26,11 +26,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         
         [Display(Name = "Преподаватель")]
-        public Teacher Teacher { get; set; } = null!;
-
-        public int TeacherId { get; set; }
-
-        public string TeacherName { get; set; } 
+        public string TeacherFIO { get; set; } = null!;
 
         
         [Display(Name = "Ученики")]
