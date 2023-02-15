@@ -30,8 +30,8 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public List<SelectListItem> TeacherSelectList { get; set; } = new List<SelectListItem>();
 
-       // список студентов у которых есть предмет lesson.Subject
-
+        // список студентов у которых есть предмет lesson.Subject
+        public List<Student> StudentSubj { get; set; } = new List<Student>();
         public string SelectedTeacher { get; set; }
     }
 }

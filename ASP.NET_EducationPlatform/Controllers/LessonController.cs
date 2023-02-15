@@ -84,13 +84,16 @@ namespace ASP.NET_EducationPlatform.Controllers
             }
 
 
-            //var students = _studentData.GetAllStudents();
-            //foreach(var student in students)
-            //{
-            //    var sub = student.Subjects.Where(s => s.IsInvolved == true);
-            //    if (sub.Contains(lesson.Subject))
-            //        model.StudentsSubj.Add(student);
-            //}
+            var students = _studentData.GetAllStudents();
+            foreach (var student in students)
+            {
+                var sub = student.Subjects.Where(s => s.IsInvolved == true);
+                foreach(var item in sub)
+                {
+                    if (item.Name == model.SubjectName)
+                        model.StudentSubj.Add(student);
+                }
+            }
 
             return View(model);
         }
@@ -118,6 +121,7 @@ namespace ASP.NET_EducationPlatform.Controllers
             lesson.Direction = model.Direction;
             lesson.Teacher = newTeacher;
             lesson.Subject = newSubject;
+            lesson.Students = model.StudentSubj;
 
            
 

@@ -17,7 +17,7 @@ namespace EducationPlatfotm.Domain.Users
         [Display(Name = "Преподаваемые предметы")]
         public List<Subject> Subjects { get; set; } = new()
         {
-            new Subject{Id = 1, Name = "Физика", IsInvolved = false},
+            new Subject{Id = 1, Name = "Физика", IsInvolved = true},
             new Subject{Id = 2, Name = "Математика", IsInvolved = false},
             new Subject{Id = 3, Name = "Обществознание", IsInvolved = false},
             new Subject{Id = 4, Name = "Русский язык", IsInvolved = false},
