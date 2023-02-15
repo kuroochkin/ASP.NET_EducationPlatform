@@ -13,6 +13,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public List<SelectListItem> SubjectSelectList { get; set; } = new List<SelectListItem>();
 
+        [Display(Name = "Предмет")]
         public string SubjectName { get; set; }
 
         public string SelectedSubject { get; set; }

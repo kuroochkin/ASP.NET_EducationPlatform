@@ -83,13 +83,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 }) ;
             }
 
-            
 
-
-
-
-
-            
             //var students = _studentData.GetAllStudents();
             //foreach(var student in students)
             //{
@@ -124,6 +118,8 @@ namespace ASP.NET_EducationPlatform.Controllers
             lesson.Direction = model.Direction;
             lesson.Teacher = newTeacher;
             lesson.Subject = newSubject;
+
+           
 
 
             #region Warning!
