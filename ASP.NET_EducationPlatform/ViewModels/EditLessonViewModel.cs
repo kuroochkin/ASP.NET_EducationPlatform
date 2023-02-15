@@ -11,6 +11,12 @@ namespace ASP.NET_EducationPlatform.ViewModels
         
         public int LessonId { get; set; }
 
+        public List<SelectListItem> SubjectSelectList { get; set; } = new List<SelectListItem>();
+
+        public string SubjectName { get; set; }
+
+        public string SelectedSubject { get; set; }
+
         [Display(Name = "Дата занятия")]
         public DateTime Date { get; set; }
 
@@ -23,8 +29,8 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public List<SelectListItem> TeacherSelectList { get; set; } = new List<SelectListItem>();
 
-        public List<Student> StudentsSubj { get; set; } = new List<Student>();// список студентов у которых есть предмет lesson.Subject
+       // список студентов у которых есть предмет lesson.Subject
 
-        public string Selected { get; set; }
+        public string SelectedTeacher { get; set; }
     }
 }

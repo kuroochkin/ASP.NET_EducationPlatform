@@ -13,12 +13,14 @@ namespace ASP.NET_EducationPlatform.Controllers
         private readonly ILessonData _lessonsData;
         private readonly ITeacherData _teacherData;
         private readonly IStudentData _studentData;
+        private readonly ISubjectData _subjectData;
 
-        public LessonController(ILessonData lessonData, ITeacherData teacherData, IStudentData studentData)
+        public LessonController(ILessonData lessonData, ITeacherData teacherData, IStudentData studentData, ISubjectData subjectData)
         {
             _lessonsData = lessonData;
             _teacherData = teacherData;
             _studentData = studentData;
+            _subjectData = subjectData;
         }
 
         public IActionResult Index()
@@ -50,14 +52,17 @@ namespace ASP.NET_EducationPlatform.Controllers
 
             var teachers = _teacherData.GetAllTeachers();
 
+            var subjects = TestData.subjects;
+
             var model = new EditLessonViewModel()
             {
                 LessonId = lesson.Id,
                 Date = lesson.DateTime,
                 Direction = lesson.Direction,
                 TeacherFullName = lesson.Teacher.FIO,
-                Selected = lesson.Teacher.Id.ToString(),
-                
+                SubjectName = lesson.Subject.Name,
+                SelectedTeacher = lesson.Teacher.Id.ToString(),
+                SelectedSubject = lesson.Subject.Id.ToString(),
             };
 
             foreach (var teacher in teachers)
@@ -69,14 +74,29 @@ namespace ASP.NET_EducationPlatform.Controllers
                 });
             }
 
-            
-            var students = _studentData.GetAllStudents();
-            foreach(var student in students)
+            foreach(var subject in subjects)
             {
-                var sub = student.Subjects.Where(s => s.IsInvolved == true);
-                if (sub.Contains(lesson.Subject))
-                    model.StudentsSubj.Add(student);
+                model.SubjectSelectList.Add(new SelectListItem
+                {
+                    Text = subject.Name,
+                    Value = Convert.ToString(subject.Id),
+                }) ;
             }
+
+            
+
+
+
+
+
+            
+            //var students = _studentData.GetAllStudents();
+            //foreach(var student in students)
+            //{
+            //    var sub = student.Subjects.Where(s => s.IsInvolved == true);
+            //    if (sub.Contains(lesson.Subject))
+            //        model.StudentsSubj.Add(student);
+            //}
 
             return View(model);
         }
@@ -94,13 +114,17 @@ namespace ASP.NET_EducationPlatform.Controllers
 
 
 
-            var newTeacher = _teacherData.GetById(int.Parse(model.Selected));
+            var newTeacher = _teacherData.GetById(int.Parse(model.SelectedTeacher));
             if (newTeacher is null)
                 return BadRequest();
+
+            var newSubject = _subjectData.GetById(int.Parse(model.SelectedSubject));
 
             lesson.DateTime = model.Date;
             lesson.Direction = model.Direction;
             lesson.Teacher = newTeacher;
+            lesson.Subject = newSubject;
+
 
             #region Warning!
             //Для работы с памятью это можно убрать(так как мы ссылку получаем)
