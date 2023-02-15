@@ -21,5 +21,7 @@ namespace EducationPlatfotm.Domain.Users
             new Subject{Id = 4, Name = "Русский язык", IsInvolved = false},
             new Subject{Id = 5, Name = "География", IsInvolved = false},
         };
+
+        public bool IsInvolved { get; set; }
     }
 }

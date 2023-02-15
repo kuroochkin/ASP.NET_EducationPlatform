@@ -12,11 +12,13 @@ namespace ASP.NET_EducationPlatform.Controllers
     {
         private readonly ILessonData _lessonsData;
         private readonly ITeacherData _teacherData;
+        private readonly IStudentData _studentData;
 
-        public LessonController(ILessonData lessonData, ITeacherData teacherData)
+        public LessonController(ILessonData lessonData, ITeacherData teacherData, IStudentData studentData)
         {
             _lessonsData = lessonData;
             _teacherData = teacherData;
+            _studentData = studentData;
         }
 
         public IActionResult Index()
@@ -55,6 +57,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Direction = lesson.Direction,
                 TeacherFullName = lesson.Teacher.FIO,
                 Selected = lesson.Teacher.Id.ToString(),
+                
             };
 
             foreach (var teacher in teachers)
@@ -64,6 +67,15 @@ namespace ASP.NET_EducationPlatform.Controllers
                     Text = teacher.FIO,
                     Value = Convert.ToString(teacher.Id),
                 });
+            }
+
+            
+            var students = _studentData.GetAllStudents();
+            foreach(var student in students)
+            {
+                var sub = student.Subjects.Where(s => s.IsInvolved == true);
+                if (sub.Contains(lesson.Subject))
+                    model.StudentsSubj.Add(student);
             }
 
             return View(model);
@@ -79,6 +91,8 @@ namespace ASP.NET_EducationPlatform.Controllers
 
             if (lesson is null)
                 return BadRequest();
+
+
 
             var newTeacher = _teacherData.GetById(int.Parse(model.Selected));
             if (newTeacher is null)
@@ -97,8 +111,6 @@ namespace ASP.NET_EducationPlatform.Controllers
             //    return NotFound();
             #endregion
 
-            ViewBag.Value = lesson.Teacher.Id;
-            ViewBag.Text = lesson.Teacher.FIO;
 
             return RedirectToAction("Index");
         }
