@@ -68,7 +68,11 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subjects = model.Speciality,
             };
 
-            if(!_teachers.Edit(teacher))
+            if (model.Id == 0)
+                _teachers.Add(teacher);
+
+
+            else if (!_teachers.Edit(teacher))
                 return NotFound();
 
             return RedirectToAction("Index");
