@@ -24,14 +24,17 @@ namespace ASP.NET_EducationPlatform.ViewModels
         [Display(Name = "Направление")]
         public string Direction { get; set; }
 
+        public List<SelectListItem> TeacherSelectList { get; set; } = new List<SelectListItem>();
+
         [Display(Name = "Преподаватель")]
         public string TeacherFullName { get; set; }
 
-
-        public List<SelectListItem> TeacherSelectList { get; set; } = new List<SelectListItem>();
-
-        // список студентов у которых есть предмет lesson.Subject
-        public List<Student> StudentSubj { get; set; } = new List<Student>();
         public string SelectedTeacher { get; set; }
+
+        public List<SelectListItem> StudentSelectList { get; set; } = new List<SelectListItem>();
+
+        public string StudentFullName { get; set; }
+
+        public string SelectedStudent { get; set; }
     }
 }

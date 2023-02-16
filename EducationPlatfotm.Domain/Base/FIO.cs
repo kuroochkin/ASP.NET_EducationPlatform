@@ -19,5 +19,11 @@ namespace EducationPlatfotm.Domain.Base
         [Required]
         [Display(Name = "Отчество")]
         public string Patronymic { get; set; }
+
+        public string fio
+        {
+            get => LastName + " " + FirstName + " " + Patronymic;
+            set { value = LastName + " " + FirstName + " " + Patronymic; }
+        }
     }
 }

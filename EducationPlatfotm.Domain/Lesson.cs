@@ -32,7 +32,7 @@ namespace EducationPlatfotm.Domain
 
 
         [Required]
-        [Display(Name = "Ученики")]
-        public ICollection<Student> Students { get; set; }
+        [Display(Name = "Ученик")]
+        public Student Student{ get; set; }
     }
 }

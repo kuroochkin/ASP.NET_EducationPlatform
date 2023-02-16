@@ -42,16 +42,13 @@
                 </div>
 
                 <div class="form-group">
-                    @for (int i = 0; i < Model.StudentSubj.Count; i++)
-                    {
-                        @Html.HiddenFor(m => m.StudentSubj[i].LastName)
-
-                        <tr>
-                            <td>@Html.DisplayFor(m => m.StudentSubj[i].LastName)</td>
-                            <td>@Html.CheckBoxFor(m => m.StudentSubj[i].IsInvolved)</td>
-                        </tr>
-                    }
+                    <td>@Html.DisplayNameFor(model => model.StudentFullName)</td>
+                    <td>@Html.DropDownListFor(model => model.SelectedStudent, Model.StudentSelectList)</td>
                 </div>
+
+
+
+                
 
                 <div class="form-group">
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
@@ -60,6 +57,7 @@
                 @Html.HiddenFor(x => x.TeacherFullName)
                 @Html.HiddenFor(x => x.LessonId)
                 @Html.HiddenFor(x => x.SubjectName)
+                @Html.HiddenFor(x => x.StudentFullName)
                 
 
 

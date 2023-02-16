@@ -14,5 +14,7 @@ namespace EducationPlatfotm.Domain.Base.Interfaces
         public string FirstName { get; set; }
         
         public string Patronymic { get; set; }
+
+        public string fio { get; set; }
     }
 }

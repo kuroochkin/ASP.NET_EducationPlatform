@@ -14,7 +14,7 @@
                     <th>@Html.DisplayNameFor(model => model.Direction)</th>
                     <th>@Html.DisplayNameFor(model => model.Subject.Name)</th>
                     <th>@Html.DisplayNameFor(model => model.Teacher)</th>
-                    <th>@Html.DisplayNameFor(model => model.Students)</th>
+                    <th>@Html.DisplayNameFor(model => model.Student)</th>
                 </tr>
             </thead>
 
@@ -34,11 +34,7 @@
                         </td>
 
                         <td>
-                            @foreach (var student in lesson.Students)
-                            {
-                                <p>@student.LastName @student.LastName @student.Patronymic</p>
-                                
-                            }
+                            <p>@lesson.Student.fio</p>
                         </td>
                         
                         <td>

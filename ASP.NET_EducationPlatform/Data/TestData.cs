@@ -37,8 +37,7 @@ namespace ASP.NET_EducationPlatform.Data
                 Subject = new Subject { Id = 1, Name = "Физика", IsInvolved = false },
                 Direction = "ОГЭ",
                 Teacher = new Teacher {Id = 1, LastName = "Келин", FirstName = "Кирилл", Patronymic = "Вячеславович"},
-                Students = new List<Student> { new Student { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9 },
-                                               new Student {Id = 2, LastName = "Петров", FirstName = "Петр", Patronymic = "Петрович", YearStudy = 11}},
+                Student = new Student {Id = 1, LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9},
             },
         };
 

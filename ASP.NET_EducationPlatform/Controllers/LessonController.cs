@@ -15,7 +15,11 @@ namespace ASP.NET_EducationPlatform.Controllers
         private readonly IStudentData _studentData;
         private readonly ISubjectData _subjectData;
 
-        public LessonController(ILessonData lessonData, ITeacherData teacherData, IStudentData studentData, ISubjectData subjectData)
+        public LessonController(
+            ILessonData lessonData, 
+            ITeacherData teacherData, 
+            IStudentData studentData, 
+            ISubjectData subjectData)
         {
             _lessonsData = lessonData;
             _teacherData = teacherData;
@@ -51,7 +55,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 return NotFound();
 
             var teachers = _teacherData.GetAllTeachers();
-
+            var students = _studentData.GetAllStudents();
             var subjects = TestData.subjects;
 
             var model = new EditLessonViewModel()
@@ -59,17 +63,19 @@ namespace ASP.NET_EducationPlatform.Controllers
                 LessonId = lesson.Id,
                 Date = lesson.DateTime,
                 Direction = lesson.Direction,
-                TeacherFullName = lesson.Teacher.FIO,
+                TeacherFullName = lesson.Teacher.fio,
                 SubjectName = lesson.Subject.Name,
+                StudentFullName = lesson.Student.fio,
                 SelectedTeacher = lesson.Teacher.Id.ToString(),
                 SelectedSubject = lesson.Subject.Id.ToString(),
+                SelectedStudent = lesson.Student.Id.ToString(),
             };
 
             foreach (var teacher in teachers)
             {
                 model.TeacherSelectList.Add(new SelectListItem
                 {
-                    Text = teacher.FIO,
+                    Text = teacher.fio,
                     Value = Convert.ToString(teacher.Id),
                 });
             }
@@ -83,15 +89,28 @@ namespace ASP.NET_EducationPlatform.Controllers
                 }) ;
             }
 
+            //foreach(var student in students)
+            //{
+            //    model.StudentSelectList.Add(new SelectListItem
+            //    {
+            //        Text = student.fio,
+            //        Value = Convert.ToString(student.Id),
+            //    });
+            //}
 
-            var students = _studentData.GetAllStudents();
             foreach (var student in students)
             {
                 var sub = student.Subjects.Where(s => s.IsInvolved == true);
-                foreach(var item in sub)
+                foreach (var item in sub)
                 {
                     if (item.Name == model.SubjectName)
-                        model.StudentSubj.Add(student);
+                    {
+                        model.StudentSelectList.Add(new SelectListItem
+                        {
+                            Text = student.fio,
+                            Value = Convert.ToString(student.Id),
+                        });
+                    }    
                 }
             }
 
@@ -115,16 +134,17 @@ namespace ASP.NET_EducationPlatform.Controllers
             if (newTeacher is null)
                 return BadRequest();
 
+            var newStudent = _studentData.GetById(int.Parse(model.SelectedStudent));
+            if (newStudent is null)
+                return BadRequest();
+
             var newSubject = _subjectData.GetById(int.Parse(model.SelectedSubject));
 
             lesson.DateTime = model.Date;
             lesson.Direction = model.Direction;
             lesson.Teacher = newTeacher;
             lesson.Subject = newSubject;
-            lesson.Students = model.StudentSubj;
-
-           
-
+            lesson.Student = newStudent;
 
             #region Warning!
             //Для работы с памятью это можно убрать(так как мы ссылку получаем)
@@ -155,7 +175,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subject = lesson.Subject,
                 Direction = lesson.Direction,
                 Teacher = lesson.Teacher,
-                Students = lesson.Students,
+                Student = lesson.Student,
             };
 
             return View(model);
