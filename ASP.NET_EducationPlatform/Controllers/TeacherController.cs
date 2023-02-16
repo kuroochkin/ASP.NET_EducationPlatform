@@ -32,11 +32,8 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(teacher);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id is null)
-                return View(new TeacherViewModel());
-
 
             var teacher = _teachers.GetById((int)id);
             if (teacher is null)

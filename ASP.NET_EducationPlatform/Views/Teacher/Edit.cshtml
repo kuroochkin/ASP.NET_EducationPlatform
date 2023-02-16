@@ -40,15 +40,12 @@
                         @Html.HiddenFor(m => m.Speciality[i].Name)
                         
                         
-                        <tr>
+                       
                             <td>@Html.DisplayFor(m => m.Speciality[i].Name)</td>
                             <td>@Html.CheckBoxFor(m => m.Speciality[i].IsInvolved)</td>
-                        </tr>
+                        
                     }
                 </div>
-
-            
-           
             <div class="form-group">
                 <input type="submit" value="Сохранить" class="btn btn-primary" />
             </div>

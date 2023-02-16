@@ -27,12 +27,8 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(student);
         }
 
-        public IActionResult Edit(int? id)
+        public IActionResult Edit(int id)
         {
-            if (id is null)
-                return View(new TeacherViewModel());
-
-
             var student = _students.GetById((int)id);
             if (student is null)
                 return NotFound();
