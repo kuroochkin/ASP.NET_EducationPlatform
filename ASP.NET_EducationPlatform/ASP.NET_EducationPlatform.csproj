@@ -72,4 +72,8 @@
     <ProjectReference Include="..\EducationPlatfotm.Domain\EducationPlatfotm.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Infrastructure\Mapping\" />
+  </ItemGroup>
+
 </Project>

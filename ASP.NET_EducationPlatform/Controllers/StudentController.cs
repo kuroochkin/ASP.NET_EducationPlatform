@@ -27,8 +27,11 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(student);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
+            if (id is null)
+                return View(new StudentViewModel());
+
             var student = _students.GetById((int)id);
             if (student is null)
                 return NotFound();
@@ -62,7 +65,10 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subjects = model.Speciality,
             };
 
-            if (!_students.Edit(student))
+            if (model.Id == 0) // или добавляем 
+                _students.Add(student);
+
+            else if (!_students.Edit(student)) // или редактируем
                 return NotFound();
 
             return RedirectToAction("Index");

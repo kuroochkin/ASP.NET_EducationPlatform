@@ -8,7 +8,6 @@ namespace ASP.NET_EducationPlatform.ViewModels
 {
     public class EditLessonViewModel
     {
-        
         public int LessonId { get; set; }
 
         public List<SelectListItem> SubjectSelectList { get; set; } = new List<SelectListItem>();
@@ -33,6 +32,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
 
         public List<SelectListItem> StudentSelectList { get; set; } = new List<SelectListItem>();
 
+        [Display(Name = "Ученик")]
         public string StudentFullName { get; set; }
 
         public string SelectedStudent { get; set; }

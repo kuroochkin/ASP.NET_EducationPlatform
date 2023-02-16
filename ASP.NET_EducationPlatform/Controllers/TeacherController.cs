@@ -32,19 +32,14 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(teacher);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
+            if (id is null)
+                return View(new TeacherViewModel());
 
             var teacher = _teachers.GetById((int)id);
             if (teacher is null)
                 return NotFound();
-
-            //var subjects = TestData.subjects.Select(s => new CheckBoxSubjects()
-            //{
-            //    Id = s.Id,
-            //    Title = s.Name,
-            //}).ToList();
-            
 
             var model = new TeacherViewModel
             {
