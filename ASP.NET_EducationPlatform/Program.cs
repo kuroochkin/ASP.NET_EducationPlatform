@@ -9,6 +9,8 @@ var services = builder.Services; // сервисы
 services.AddSingleton<ITeacherData, InMemoryTeacherData>();
 services.AddSingleton<IStudentData, InMemoryStudentData>();
 services.AddSingleton<ILessonData, InMemoryLessonData>();
+services.AddSingleton<ISubjectData, InMemorySubjectData>();
+
 
 services.AddControllersWithViews(opt =>
 {
