@@ -44,6 +44,11 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(lesson);
         }
 
+        public IActionResult NullStudent()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -114,6 +119,14 @@ namespace ASP.NET_EducationPlatform.Controllers
                 }
             }
 
+            if (model.StudentSelectList.Count == 0)
+                return View("NullStudent");
+
+            //var les = lesson.Student.Subjects.FirstOrDefault(s => s.Id == lesson.Subject.Id);
+
+            //if (lesson.Subject.Id != les.Id)
+            //    return View("NullStudent");
+
             return View(model);
         }
 
@@ -127,8 +140,6 @@ namespace ASP.NET_EducationPlatform.Controllers
 
             if (lesson is null)
                 return BadRequest();
-
-
 
             var newTeacher = _teacherData.GetById(int.Parse(model.SelectedTeacher));
             if (newTeacher is null)
