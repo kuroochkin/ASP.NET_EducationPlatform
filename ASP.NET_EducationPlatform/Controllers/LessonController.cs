@@ -1,5 +1,4 @@
 ﻿using ASP.NET_EducationPlatform.Data;
-using ASP.NET_EducationPlatform.Infrastructure.Mapping;
 using ASP.NET_EducationPlatform.Services.Interfaces;
 using ASP.NET_EducationPlatform.ViewModels;
 using EducationPlatfotm.Domain;
@@ -54,7 +53,7 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IActionResult Edit(int? id)
         {
             if (id is null)
-                return View(NewLessonMapper.ToView());
+                return View(new EditLessonViewModel()); 
 
             var lesson = _lessonsData.GetById((int)id);
             if (lesson is null)
@@ -92,7 +91,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 {
                     Text = subject.Name,
                     Value = Convert.ToString(subject.Id),
-                }) ;
+                });
             }
 
             //foreach(var student in students)
@@ -134,8 +133,8 @@ namespace ASP.NET_EducationPlatform.Controllers
         [HttpPost]
         public IActionResult Edit(EditLessonViewModel model)
         {
-            if (model == null || !ModelState.IsValid)
-                return NotFound();
+            if (!ModelState.IsValid)
+                return View(model);
 
             var lesson = _lessonsData.GetById(model.LessonId);
 
@@ -151,6 +150,8 @@ namespace ASP.NET_EducationPlatform.Controllers
                 return BadRequest();
 
             var newSubject = _subjectData.GetById(int.Parse(model.SelectedSubject));
+            if (newSubject is null)
+                return BadRequest();
 
             lesson.DateTime = model.Date;
             lesson.Direction = model.Direction;
@@ -172,7 +173,6 @@ namespace ASP.NET_EducationPlatform.Controllers
             //if (!_lessonsData.Edit(lesson))
             //    return NotFound();
             #endregion
-
 
             return RedirectToAction("Index");
         }
