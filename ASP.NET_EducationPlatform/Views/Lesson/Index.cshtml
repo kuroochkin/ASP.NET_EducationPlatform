@@ -4,6 +4,8 @@
     <h3>Мои уроки</h3>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
+    <a class="btn btn-default" asp-action="Edit">Добавить урок</a>
+
     @if (Model.Any())
     {
         <table class="table table-bordered">
@@ -29,12 +31,14 @@
                         <td>@lesson.Subject.Name</td>
                         <td>
                             <a asp-controller="Teacher" asp-action="Details" asp-route-Id="@lesson.Teacher.Id">
-                                @lesson.Teacher.LastName  @lesson.Teacher.FirstName @lesson.Teacher.Patronymic
+                                @lesson.Teacher.fio
                             </a>
                         </td>
 
                         <td>
-                            <p>@lesson.Student.fio</p>
+                            <a asp-controller="Student" asp-action="Details" asp-route-Id="@lesson.Student.Id">
+                                @lesson.Student.fio
+                            </a>
                         </td>
                         
                         <td>

@@ -3,6 +3,9 @@
 
 @model ASP.NET_EducationPlatform.ViewModels.EditLessonViewModel
 
+<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
 @{
     ViewData["Title"] = "Edit";
@@ -30,6 +33,11 @@
                     <span asp-validation-for="Direction" class="text-danger"></span>
                 </div>
 
+                <div class="form-group">
+                    <td>@Html.DisplayNameFor(model => model.SubjectName)</td>
+                    <td>@Html.DropDownListFor(model => model.SelectedSubject, Model.SubjectSelectList)</td>
+                </div>
+
 
                 <div class="form-group">
                     <td>@Html.DisplayNameFor(model => model.TeacherFullName)</td>
@@ -37,32 +45,23 @@
                 </div>
 
                 <div class="form-group">
-                    <td>@Html.DisplayNameFor(model => model.SubjectName)</td>
-                    <td>@Html.DropDownListFor(model => model.SelectedSubject, Model.SubjectSelectList)</td>
-                </div>
-
-                <div class="form-group">
                     <td>@Html.DisplayNameFor(model => model.StudentFullName)</td>
                     <td>@Html.DropDownListFor(model => model.SelectedStudent, Model.StudentSelectList)</td>
                 </div>
-
-
-
-                
 
                 <div class="form-group">
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
                 </div>
 
-                @Html.HiddenFor(x => x.TeacherFullName)
                 @Html.HiddenFor(x => x.LessonId)
                 @Html.HiddenFor(x => x.SubjectName)
+                @Html.HiddenFor(x => x.TeacherFullName)
                 @Html.HiddenFor(x => x.StudentFullName)
-                
-
 
             </form>
+
         </div>
+        
     </div>
 
     <div>

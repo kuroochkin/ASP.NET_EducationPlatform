@@ -1,4 +1,5 @@
-﻿using EducationPlatfotm.Domain;
+﻿using ASP.NET_EducationPlatform.Data;
+using EducationPlatfotm.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
@@ -25,6 +26,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
         public int YearStudy { get; set; }
 
         [Display(Name = "Изучаемые предметы")]
-        public List<Subject> Speciality { get; set; }
+        public List<Subject> Speciality { get; set; } = TestData.subjects;
     }
+            
 }

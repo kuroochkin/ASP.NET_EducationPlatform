@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<EducationPlatfotm.Domain.Users.Student>
 
 <div class="container">
-    <h3>Сотрудники</h3>
+    <h3>Ученики</h3>
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <a class="btn btn-default" asp-action="Edit">Добавить ученика</a>
+    <p></p>
 
     @if (Model.Any())
     {

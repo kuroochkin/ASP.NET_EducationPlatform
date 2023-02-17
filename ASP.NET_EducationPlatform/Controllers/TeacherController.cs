@@ -37,17 +37,9 @@ namespace ASP.NET_EducationPlatform.Controllers
             if (id is null)
                 return View(new TeacherViewModel());
 
-
             var teacher = _teachers.GetById((int)id);
             if (teacher is null)
                 return NotFound();
-
-            //var subjects = TestData.subjects.Select(s => new CheckBoxSubjects()
-            //{
-            //    Id = s.Id,
-            //    Title = s.Name,
-            //}).ToList();
-            
 
             var model = new TeacherViewModel
             {
@@ -76,7 +68,11 @@ namespace ASP.NET_EducationPlatform.Controllers
                 Subjects = model.Speciality,
             };
 
-            if(!_teachers.Edit(teacher))
+            if (model.Id == 0)
+                _teachers.Add(teacher);
+
+
+            else if (!_teachers.Edit(teacher))
                 return NotFound();
 
             return RedirectToAction("Index");

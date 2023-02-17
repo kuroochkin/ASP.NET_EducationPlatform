@@ -44,6 +44,11 @@ namespace ASP.NET_EducationPlatform.Controllers
             return View(lesson);
         }
 
+        public IActionResult NullStudent()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Edit(int? id)
         {
@@ -80,13 +85,13 @@ namespace ASP.NET_EducationPlatform.Controllers
                 });
             }
 
-            foreach(var subject in subjects)
+            foreach (var subject in subjects)
             {
                 model.SubjectSelectList.Add(new SelectListItem
                 {
                     Text = subject.Name,
                     Value = Convert.ToString(subject.Id),
-                }) ;
+                });
             }
 
             //foreach(var student in students)
@@ -110,7 +115,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                             Text = student.fio,
                             Value = Convert.ToString(student.Id),
                         });
-                    }    
+                    }
                 }
             }
 
