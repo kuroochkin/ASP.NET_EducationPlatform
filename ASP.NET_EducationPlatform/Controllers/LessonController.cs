@@ -1,4 +1,5 @@
 ﻿using ASP.NET_EducationPlatform.Data;
+using ASP.NET_EducationPlatform.Infrastructure.Mapping;
 using ASP.NET_EducationPlatform.Services.Interfaces;
 using ASP.NET_EducationPlatform.ViewModels;
 using EducationPlatfotm.Domain;
@@ -53,7 +54,7 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IActionResult Edit(int? id)
         {
             if (id is null)
-                return View(new EditLessonViewModel());
+                return View(NewLessonMapper.ToView());
 
             var lesson = _lessonsData.GetById((int)id);
             if (lesson is null)
@@ -156,6 +157,12 @@ namespace ASP.NET_EducationPlatform.Controllers
             lesson.Teacher = newTeacher;
             lesson.Subject = newSubject;
             lesson.Student = newStudent;
+
+            if (model.LessonId == 0) // или добавляем 
+                _lessonsData.Add(lesson);
+
+            else if (!_lessonsData.Edit(lesson)) // или редактируем
+                return NotFound();
 
             #region Warning!
             //Для работы с памятью это можно убрать(так как мы ссылку получаем)
