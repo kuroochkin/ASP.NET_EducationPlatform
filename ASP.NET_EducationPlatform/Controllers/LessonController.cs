@@ -53,7 +53,7 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IActionResult Edit(int? id)
         {
             if (id is null)
-                return View(new EditLessonViewModel()); 
+                return View(new EditLessonViewModel());
 
             var lesson = _lessonsData.GetById((int)id);
             if (lesson is null)
@@ -85,7 +85,7 @@ namespace ASP.NET_EducationPlatform.Controllers
                 });
             }
 
-            foreach(var subject in subjects)
+            foreach (var subject in subjects)
             {
                 model.SubjectSelectList.Add(new SelectListItem
                 {
@@ -115,17 +115,9 @@ namespace ASP.NET_EducationPlatform.Controllers
                             Text = student.fio,
                             Value = Convert.ToString(student.Id),
                         });
-                    }    
+                    }
                 }
             }
-
-            if (model.StudentSelectList.Count == 0)
-                return View("NullStudent");
-
-            //var les = lesson.Student.Subjects.FirstOrDefault(s => s.Id == lesson.Subject.Id);
-
-            //if (lesson.Subject.Id != les.Id)
-            //    return View("NullStudent");
 
             return View(model);
         }
@@ -133,13 +125,15 @@ namespace ASP.NET_EducationPlatform.Controllers
         [HttpPost]
         public IActionResult Edit(EditLessonViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
+            if (model == null || !ModelState.IsValid)
+                return NotFound();
 
             var lesson = _lessonsData.GetById(model.LessonId);
 
             if (lesson is null)
                 return BadRequest();
+
+
 
             var newTeacher = _teacherData.GetById(int.Parse(model.SelectedTeacher));
             if (newTeacher is null)
@@ -150,20 +144,12 @@ namespace ASP.NET_EducationPlatform.Controllers
                 return BadRequest();
 
             var newSubject = _subjectData.GetById(int.Parse(model.SelectedSubject));
-            if (newSubject is null)
-                return BadRequest();
 
             lesson.DateTime = model.Date;
             lesson.Direction = model.Direction;
             lesson.Teacher = newTeacher;
             lesson.Subject = newSubject;
             lesson.Student = newStudent;
-
-            if (model.LessonId == 0) // или добавляем 
-                _lessonsData.Add(lesson);
-
-            else if (!_lessonsData.Edit(lesson)) // или редактируем
-                return NotFound();
 
             #region Warning!
             //Для работы с памятью это можно убрать(так как мы ссылку получаем)
@@ -173,6 +159,7 @@ namespace ASP.NET_EducationPlatform.Controllers
             //if (!_lessonsData.Edit(lesson))
             //    return NotFound();
             #endregion
+
 
             return RedirectToAction("Index");
         }
