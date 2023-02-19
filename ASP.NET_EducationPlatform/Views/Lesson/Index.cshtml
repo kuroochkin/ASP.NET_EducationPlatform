@@ -36,14 +36,11 @@
                             </a>
                         </td>
 
-                        
-                        {
-                            <td>
-                                <a asp-controller="Student" asp-action="Details" asp-route-Id="@lesson.Student.Id">
-                                    @lesson.Student.fio
-                                </a>
-                            </td>
-                        } 
+                        <td>
+                            <a asp-controller="Student" asp-action="Details" asp-route-Id="@lesson.Student.Id">
+                                @lesson.Student.fio
+                            </a>
+                        </td>
 
                         @if (lesson.Id != 1)
                         {

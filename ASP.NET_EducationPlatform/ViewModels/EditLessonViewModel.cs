@@ -8,6 +8,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
 {
     public class EditLessonViewModel
     {
+        [Display(Name = "Id")]
         public int LessonId { get; set; }
 
         public List<SelectListItem> SubjectSelectList { get; set; } = new List<SelectListItem>();
