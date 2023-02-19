@@ -23,6 +23,7 @@ namespace ASP.NET_EducationPlatform.ViewModels
         [RegularExpression(@"([А-ЯЁ][а-яё]+)|([A-Z][a-z]+)", ErrorMessage = "Некорректный ввод")]
         public string Patronymic { get; set; }
 
+        [Display(Name = "Класс")]
         public int YearStudy { get; set; }
 
         [Display(Name = "Изучаемые предметы")]

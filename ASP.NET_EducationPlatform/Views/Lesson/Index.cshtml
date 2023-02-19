@@ -5,6 +5,7 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 
     <a class="btn btn-default" asp-action="Create">Добавить урок</a>
+    <p></p>
 
     @if (Model.Any())
     {
@@ -35,15 +36,21 @@
                             </a>
                         </td>
 
-                        <td>
-                            <a asp-controller="Student" asp-action="Details" asp-route-Id="@lesson.Student.Id">
-                                @lesson.Student.fio
-                            </a>
-                        </td>
                         
-                        <td>
-                            <a asp-controller="Lesson" asp-action="Delete" asp-route-Id="@lesson.Id">Удалить</a>
-                        </td>
+                        {
+                            <td>
+                                <a asp-controller="Student" asp-action="Details" asp-route-Id="@lesson.Student.Id">
+                                    @lesson.Student.fio
+                                </a>
+                            </td>
+                        } 
+
+                        @if (lesson.Id != 1)
+                        {
+                            <td>
+                                <a asp-controller="Lesson" asp-action="Delete" asp-route-Id="@lesson.Id">Удалить</a>
+                            </td>
+                        }
                     </tr>
                 }
             </tbode>       

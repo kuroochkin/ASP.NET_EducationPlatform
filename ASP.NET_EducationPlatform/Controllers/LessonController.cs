@@ -98,16 +98,16 @@ namespace ASP.NET_EducationPlatform.Controllers
                 var sub = student.Subjects.Where(s => s.IsInvolved == true);
                 foreach (var item in sub)
                 {
-                    
-                    
                         model.StudentSelectList.Add(new SelectListItem
                         {
                             Text = student.fio,
                             Value = Convert.ToString(student.Id),
                         });
-                    
                 }
             }
+
+            if (model.StudentSelectList.Count == 0)
+                return View("NullStudent");
 
             return View(model);
 
@@ -192,15 +192,6 @@ namespace ASP.NET_EducationPlatform.Controllers
                 });
             }
 
-            //foreach(var student in students)
-            //{
-            //    model.StudentSelectList.Add(new SelectListItem
-            //    {
-            //        Text = student.fio,
-            //        Value = Convert.ToString(student.Id),
-            //    });
-            //}
-
             foreach (var student in students)
             {
                 var sub = student.Subjects.Where(s => s.IsInvolved == true);
@@ -274,14 +265,17 @@ namespace ASP.NET_EducationPlatform.Controllers
             if (lesson is null)
                 return NotFound();
 
-            var model = new Lesson
+            var model = new EditLessonViewModel
             {
-                Id = lesson.Id,
-                DateTime = lesson.DateTime,
-                Subject = lesson.Subject,
+                LessonId = lesson.Id,
+                Date = lesson.DateTime,
                 Direction = lesson.Direction,
-                Teacher = lesson.Teacher,
-                Student = lesson.Student,
+                TeacherFullName = lesson.Teacher.fio,
+                SubjectName = lesson.Subject.Name,
+                StudentFullName = lesson.Student.fio,
+                SelectedTeacher = lesson.Teacher.Id.ToString(),
+                SelectedSubject = lesson.Subject.Id.ToString(),
+                SelectedStudent = lesson.Student.Id.ToString(),
             };
 
             return View(model);
