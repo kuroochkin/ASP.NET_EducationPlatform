@@ -5,6 +5,7 @@ using EducationPlatfotm.Domain;
 using EducationPlatfotm.Domain.Users;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Diagnostics.Contracts;
 
 namespace ASP.NET_EducationPlatform.Controllers
 {
@@ -47,6 +48,103 @@ namespace ASP.NET_EducationPlatform.Controllers
         public IActionResult NullStudent()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            var lesson = _lessonsData.GetById(1);
+
+            var model = new EditLessonViewModel()
+            {
+                LessonId = 0,
+                Date = lesson.DateTime,
+                Direction = lesson.Direction,
+                TeacherFullName = lesson.Teacher.fio,
+                SubjectName = lesson.Subject.Name,
+                StudentFullName = lesson.Student.fio,
+                SelectedTeacher = lesson.Teacher.Id.ToString(),
+                SelectedSubject = lesson.Subject.Id.ToString(),
+                SelectedStudent = lesson.Student.Id.ToString(),
+            };
+
+            var teachers = _teacherData.GetAllTeachers();
+            var students = _studentData.GetAllStudents();
+            var subjects = TestData.subjects;
+
+            
+
+            foreach (var teacher in teachers)
+            {
+                model.TeacherSelectList.Add(new SelectListItem
+                {
+                    Text = teacher.fio,
+                    Value = Convert.ToString(teacher.Id),
+                });
+            }
+
+            foreach (var subject in subjects)
+            {
+                model.SubjectSelectList.Add(new SelectListItem
+                {
+                    Text = subject.Name,
+                    Value = Convert.ToString(subject.Id),
+                });
+            }
+
+           
+            foreach (var student in students)
+            {
+                var sub = student.Subjects.Where(s => s.IsInvolved == true);
+                foreach (var item in sub)
+                {
+                    
+                    
+                        model.StudentSelectList.Add(new SelectListItem
+                        {
+                            Text = student.fio,
+                            Value = Convert.ToString(student.Id),
+                        });
+                    
+                }
+            }
+
+            return View(model);
+
+        }
+
+        [HttpPost]
+        public IActionResult Create(EditLessonViewModel model)
+        {
+            if (model == null || !ModelState.IsValid)
+                return NotFound();
+
+            var newTeacher = _teacherData.GetById(int.Parse(model.SelectedTeacher));
+            if (newTeacher is null)
+                return BadRequest();
+
+            var newStudent = _studentData.GetById(int.Parse(model.SelectedStudent));
+            if (newStudent is null)
+                return BadRequest();
+
+            var newSubject = _subjectData.GetById(int.Parse(model.SelectedSubject));
+            if (newSubject is null)
+                return BadRequest();
+
+            var lesson = new Lesson()
+            {
+                Id = model.LessonId,
+                DateTime = model.Date,
+                Direction = model.Direction,
+                Subject = newSubject,
+                Teacher = newTeacher,
+                Student = newStudent,    
+            };
+
+            if(model.LessonId == 0)
+                _lessonsData.Add(lesson);
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
@@ -118,6 +216,9 @@ namespace ASP.NET_EducationPlatform.Controllers
                     }
                 }
             }
+
+            if (model.StudentSelectList.Count == 0)
+                return View("NullStudent");
 
             return View(model);
         }
