@@ -2,6 +2,8 @@ using ASP.NET_EducationPlatform.Infrastructure;
 using ASP.NET_EducationPlatform.Infrastructure.Conventions;
 using ASP.NET_EducationPlatform.Services.InMemory;
 using ASP.NET_EducationPlatform.Services.Interfaces;
+using EducationPlatform.DAL;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +18,9 @@ services.AddControllersWithViews(opt =>
 {
     opt.Conventions.Add(new TestConvention());
 });
+
+services.AddDbContext<EducationPlatformDB>(opt => opt
+     .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))); // строка подключения
 
 var app = builder.Build();
 
