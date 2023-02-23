@@ -30,7 +30,6 @@ namespace EducationPlatfotm.Domain
 
         public string FIOTeacher { get; set; }
 
-
         [Required]
         [Display(Name = "Ученик")]
         public Student Student{ get; set; }
