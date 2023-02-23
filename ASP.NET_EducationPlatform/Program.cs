@@ -1,5 +1,6 @@
 using ASP.NET_EducationPlatform.Infrastructure;
 using ASP.NET_EducationPlatform.Infrastructure.Conventions;
+using ASP.NET_EducationPlatform.Services;
 using ASP.NET_EducationPlatform.Services.InMemory;
 using ASP.NET_EducationPlatform.Services.Interfaces;
 using EducationPlatform.DAL;
@@ -20,9 +21,17 @@ services.AddControllersWithViews(opt =>
 });
 
 services.AddDbContext<EducationPlatformDB>(opt => opt
-     .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))); // строка подключения
+     .UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));// строка подключения
+
+services.AddTransient<IDbInitializer, DbInitializer>();
 
 var app = builder.Build();
+
+await using (var scope = app.Services.CreateAsyncScope())
+{
+    var db_initializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+    await db_initializer.InitializeAsync();
+}
 
 //__________________________________//
 
