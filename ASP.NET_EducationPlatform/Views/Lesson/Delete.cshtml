@@ -1,0 +1,67 @@
+﻿@model ASP.NET_EducationPlatform.ViewModels.EditLessonViewModel
+
+<link href="css/stylesheet.css" rel="stylesheet" type="text/css" />
+<link href="~/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container">
+
+<h2>Удаление урока Id: {@Model.LessonId}</h2>
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LessonId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LessonId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubjectName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SubjectName)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Direction)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Direction)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TeacherFullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TeacherFullName)
+        </dd>
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.StudentFullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StudentFullName)
+        </dd>
+        
+    </dl>
+    
+    <form asp-action="DeleteConfirmed" asp-route-id="@Model.LessonId">
+        <input type="submit" value="Удалить" class="btn btn-default" /> |
+        <a asp-action="Index">К списку</a>
+    </form>
+</div>
+</div>
