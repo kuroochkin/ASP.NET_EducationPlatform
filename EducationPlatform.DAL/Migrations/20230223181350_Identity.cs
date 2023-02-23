@@ -77,7 +77,6 @@ namespace EducationPlatform.DAL.Migrations
                     SubjectId = table.Column<int>(type: "int", nullable: false),
                     Direction = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeacherId = table.Column<int>(type: "int", nullable: false),
-                    FIOTeacher = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StudentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

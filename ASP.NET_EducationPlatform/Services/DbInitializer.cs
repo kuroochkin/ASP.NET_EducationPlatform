@@ -31,6 +31,7 @@ namespace ASP.NET_EducationPlatform.Services
 
             await InitializeTeachersAsync(Cancel).ConfigureAwait(false);
             await InitializeStudentsAsync(Cancel).ConfigureAwait(false);
+            await InitializeLessonsAsync(Cancel).ConfigureAwait(false);
         }
 
         private async Task InitializeTeachersAsync(CancellationToken Cancel = default)
@@ -62,6 +63,23 @@ namespace ASP.NET_EducationPlatform.Services
                 await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Students] ON", Cancel);
                 await _db.SaveChangesAsync(Cancel);
                 await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Students] OFF", Cancel);
+
+                await _db.Database.CommitTransactionAsync(Cancel);
+            }
+        }
+
+        private async Task InitializeLessonsAsync(CancellationToken Cancel = default)
+        {
+            if (_db.Lessons.Any())
+                return;
+
+            await using (await _db.Database.BeginTransactionAsync(Cancel))
+            {
+                await _db.Lessons.AddRangeAsync(TestData.lessons, Cancel);
+
+                await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Lessons] ON", Cancel);
+                await _db.SaveChangesAsync(Cancel);
+                await _db.Database.ExecuteSqlRawAsync("SET IDENTITY_INSERT [dbo].[Lessons] OFF", Cancel);
 
                 await _db.Database.CommitTransactionAsync(Cancel);
             }
