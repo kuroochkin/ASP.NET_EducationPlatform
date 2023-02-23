@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace EducationPlatfotm.Domain.Base
         [Display(Name = "Отчество")]
         public string Patronymic { get; set; }
 
+        [NotMapped]
         public string fio
         {
             get => LastName + " " + FirstName + " " + Patronymic;
