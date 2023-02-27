@@ -11,11 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services; // сервисы
 
-services.AddSingleton<IStudentData, InMemoryStudentData>();
+
+services.AddScoped<ITeacherData, SqlTeachersData>();
+services.AddScoped<IStudentData, SqlStudentsData>();
+
 services.AddSingleton<ILessonData, InMemoryLessonData>();
 services.AddSingleton<ISubjectData, InMemorySubjectData>();
 
-services.AddScoped<ITeacherData, SqlTeachersData>();
+
 
 
 
