@@ -2,6 +2,7 @@ using ASP.NET_EducationPlatform.Infrastructure;
 using ASP.NET_EducationPlatform.Infrastructure.Conventions;
 using ASP.NET_EducationPlatform.Services;
 using ASP.NET_EducationPlatform.Services.InMemory;
+using ASP.NET_EducationPlatform.Services.InSQL;
 using ASP.NET_EducationPlatform.Services.Interfaces;
 using EducationPlatform.DAL;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +10,14 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 var services = builder.Services; // сервисы
-services.AddSingleton<ITeacherData, InMemoryTeacherData>();
+
 services.AddSingleton<IStudentData, InMemoryStudentData>();
 services.AddSingleton<ILessonData, InMemoryLessonData>();
 services.AddSingleton<ISubjectData, InMemorySubjectData>();
+
+services.AddScoped<ITeacherData, SqlTeachersData>();
+
+
 
 
 services.AddControllersWithViews(opt =>
