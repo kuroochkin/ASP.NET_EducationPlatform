@@ -11,6 +11,10 @@ namespace EducationPlatfotm.Domain.Base
 {
     public class FIO : IFIO
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         [Required]
         [Display(Name = "Фамилия")]
         public string LastName { get; set; }

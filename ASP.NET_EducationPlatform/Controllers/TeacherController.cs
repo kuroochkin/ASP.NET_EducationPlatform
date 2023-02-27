@@ -5,7 +5,6 @@ using ASP.NET_EducationPlatform.ViewModels;
 using EducationPlatfotm.Domain;
 using EducationPlatfotm.Domain.Users;
 using Microsoft.AspNetCore.Mvc;
-using System.Data.Entity.Core.Mapping;
 
 namespace ASP.NET_EducationPlatform.Controllers
 {

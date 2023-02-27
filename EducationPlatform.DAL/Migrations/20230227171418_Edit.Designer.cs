@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationPlatform.DAL.Migrations
 {
     [DbContext(typeof(EducationPlatformDB))]
-    [Migration("20230223181350_Identity")]
-    partial class Identity
+    [Migration("20230227171418_Edit")]
+    partial class Edit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,10 +36,6 @@ namespace EducationPlatform.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Direction")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FIOTeacher")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
