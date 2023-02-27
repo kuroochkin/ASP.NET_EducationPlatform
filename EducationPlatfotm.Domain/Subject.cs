@@ -1,20 +1,17 @@
 ﻿using EducationPlatfotm.Domain.Base;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
+using IndexAttribute = Microsoft.EntityFrameworkCore.IndexAttribute;
 
 namespace EducationPlatfotm.Domain
 {
-    public class Subject
+    [Index(nameof(Name), IsUnique = true)]
+    public class Subject : NamedEntity
     {
-        public int Id { get; set; }
-        [Display(Name = "Преподаваемый премет")]
-        public string Name { get; set; }
-
+        
         public bool IsInvolved { get; set; }
     }
 }
