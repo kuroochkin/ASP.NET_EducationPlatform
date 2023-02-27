@@ -43,6 +43,8 @@ namespace ASP.NET_EducationPlatform.Services.InSQL
         {
             _db.Teachers.Update(teacher);
 
+            _db.SaveChanges();
+
             return _db.SaveChanges() != 0;
         }
 

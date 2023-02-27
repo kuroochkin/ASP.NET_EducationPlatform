@@ -14,13 +14,9 @@ var services = builder.Services; // сервисы
 
 services.AddScoped<ITeacherData, SqlTeachersData>();
 services.AddScoped<IStudentData, SqlStudentsData>();
+services.AddScoped<ILessonData, SqlLessonsData>();
 
-services.AddSingleton<ILessonData, InMemoryLessonData>();
 services.AddSingleton<ISubjectData, InMemorySubjectData>();
-
-
-
-
 
 
 services.AddControllersWithViews(opt =>

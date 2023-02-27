@@ -33,7 +33,7 @@ namespace ASP.NET_EducationPlatform.Data
             new Lesson
             { 
                 DateTime = new DateTime(2023,6,6),
-                Subject = new Subject {Name = "Физика", IsInvolved = false },
+                Subject = new Subject {Name = "Физика", IsInvolved = true },
                 Direction = "ОГЭ",
                 Teacher = new Teacher {LastName = "Келин", FirstName = "Кирилл", Patronymic = "Вячеславович"},
                 Student = new Student {LastName = "Иванов", FirstName = "Иван", Patronymic = "Иванович", YearStudy = 9},
